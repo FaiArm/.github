@@ -1,0 +1,24 @@
+name: Ensure README.md is present
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  check-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check if README.md exists
+        run: |
+          if [ ! -f README.md ]; then
+            echo "::error:: README.md is missing! Please add a README.md file."
+            exit 1
+          else
+            echo "README.md is present."
+          fi
